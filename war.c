@@ -40,63 +40,6 @@ typedef struct
     char nome[30];
     int tropas;
 } Territorio;
-
-/*
- Função que simula um ataque entre dois territórios.
- Recebe ponteiros para o território atacante e defensor.
- A lógica segue:
- - Atacante precisa ter >1 tropa para atacar
- - Cada um rola um dado (1 a 6)
- - Empate favorece o atacante
- - Se atacante vence: defensor perde 1 tropa
- - Se defensor chegar a 0 tropas: território é conquistado
-*/
-void simularAtaque(Territorio *atacante, Territorio *defensor)
-{
-
-    if (atacante->tropas <= 1)
-    {
-        printf("\nO território atacante precisa ter mais de 1 tropa para atacar.\n");
-        return;
-    }
-
-    printf("\nRolando dados...\n");
-
-    int dadoAtaque = rand() % 6 + 1; // Número entre 1 e 6
-    int dadoDefesa = rand() % 6 + 1; // Número entre 1 e 6
-
-    printf("Ataque (%s): %d\n", atacante->nome, dadoAtaque);
-    printf("Defesa (%s): %d\n", defensor->nome, dadoDefesa);
-
-    // Empate favorece o atacante
-    if (dadoAtaque >= dadoDefesa)
-    {
-        defensor->tropas--;
-
-        printf("Atacante venceu o duelo! O território %s perde 1 tropa.\n",
-               defensor->nome);
-
-        // Se defensor perdeu todas as tropas, atacante conquista
-        if (defensor->tropas <= 0)
-        {
-            printf("%s conquistou o território %s!\n",
-                   atacante->nome, defensor->nome);
-
-            defensor->tropas = 1; // O novo território fica com 1 tropa
-            atacante->tropas--;   // Uma tropa é movida para lá
-        }
-    }
-    else
-    {
-        printf("O defensor venceu a rolagem. Nenhuma tropa perdida.\n");
-    }
-
-    // Situação após o duelo
-    printf("\nSituação atual:\n");
-    printf(" - %s: %d tropas\n", atacante->nome, atacante->tropas);
-    printf(" - %s: %d tropas\n", defensor->nome, defensor->tropas);
-}
-
 int main()
 {
     // 1. Configuração Inicial (Setup):
