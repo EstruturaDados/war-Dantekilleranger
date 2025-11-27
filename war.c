@@ -31,6 +31,19 @@
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 5           // Quantidade fixa de territórios
+#define TAM_STR 50      // Tamanho máximo para strings (nome e cor)
+
+// Definição da struct Territorio
+typedef struct {
+    char nome[TAM_STR];   // Nome do território
+    char cor[TAM_STR];    // Cor do exército dominante
+    int tropas;           // Número de tropas no território
+} Territorio;
+
 int main() {
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
@@ -51,7 +64,44 @@ int main() {
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
 
-    return 0;
+    Territorio mapa[MAX]; // Vetor estático com 5 territórios
+
+    printf("=== Cadastro de Territórios ===\n\n");
+
+    // Loop para cadastrar os 5 territórios
+    for (int i = 0; i < MAX; i++) {
+        printf("Território %d:\n", i + 1);
+
+        // Leitura do nome do território
+        printf("Nome: ");
+        fgets(mapa[i].nome, TAM_STR, stdin);
+        mapa[i].nome[strcspn(mapa[i].nome, "\n")] = '\0'; // Remove o \n
+
+        // Leitura da cor do exército
+        printf("Cor do Exército: ");
+        fgets(mapa[i].cor, TAM_STR, stdin);
+        mapa[i].cor[strcspn(mapa[i].cor, "\n")] = '\0'; // Remove o \n
+
+        // Leitura do número de tropas
+        printf("Número de Tropas: ");
+        scanf("%d", &mapa[i].tropas);
+
+        getchar(); // Remove o \n deixado pelo scanf para evitar problemas no próximo fgets
+
+        printf("\n");
+    }
+
+    // Exibição dos dados cadastrados
+    printf("\n=== Estado Atual do Mapa ===\n");
+    for (int i = 0; i < MAX; i++) {
+        printf("Território %d:\n", i + 1);
+        printf("  Nome: %s\n", mapa[i].nome);
+        printf("  Cor do Exército: %s\n", mapa[i].cor);
+        printf("  Tropas: %d\n\n", mapa[i].tropas);
+    }
+
+    return 0; // Fim do programa
+
 }
 
 // --- Implementação das Funções ---

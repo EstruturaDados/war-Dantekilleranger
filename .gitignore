@@ -1,0 +1,53 @@
+# Binários e arquivos de build
+*.o
+*.out
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+war
+
+# Diretórios comuns de compilação
+/build/
+/bin/
+/debug/
+/release/
+
+# Arquivos gerados por depuradores
+*.pdb
+*.idb
+*.ilk
+
+# CMake (se usar)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Makefile gerado automaticamente
+*.mk
+
+# VS Code settings locais
+.vscode/
+
+# Extensões temporárias
+*.tmp
+*.log
+
+# Arquivos de backup
+*~
+*.bak
+*.swp
+*.swo
+
+# Tags (ctags)
+tags
+
+# Arquivos do clangd
+.cache/
+clangd/
+
+# Arquivos de teste
+*.test
